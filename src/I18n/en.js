@@ -33,6 +33,12 @@ Location:'Location',
 Questions:'Questions',
 Home:'Home',
 AboutContent:'Vision Specialized Eye Center is a milestone in ophthalmology in Buraidah - Al-Qassim, as it is characterized by adherence to high quality and the latest foundations and scientific medical standards with all honesty and credibility, as it was established by eye consultants with great experience, with the attraction of a distinguished elite of consultants And Saudi academics in the field of ophthalmology.',
-
-
+ReserveAppointment:'Reserve Appointment',
+Hello:'Hello',
+next:'Next',
+Previous:'Previous',
+TotalVisits:'Total Visits' ,
+NotFinishedVisits:'Continue Visits' ,
+FinishedVisits:'Finished Visits' ,
+RegisterSucess:"Reservation success",
 };

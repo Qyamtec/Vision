@@ -1,92 +1,27 @@
-// import React, { Component } from 'react';
-// import { Container, Header,Body,Switch,Button, Content, List, ListItem, Text, Left, Right, Icon } from 'native-base';
-// export default class Setting extends Component {
-//   render() {
-//     return (
-//       <Container>
-//         <Content>
-//           <List>
-//           <ListItem icon>
-//             <Left>
-//               <Button style={{ backgroundColor: "#FF9501" }}>
-//                 <Icon active name="airplane" />
-//               </Button>
-//             </Left>
-//             <Body>
-//               <Text>Airplane Mode</Text>
-//             </Body>
-//             <Right>
-//               <Switch value={false} />
-//             </Right>
-//           </ListItem>
-//           <ListItem icon>
-//             <Left>
-//               <Button style={{ backgroundColor: "#007AFF" }}>
-//                 <Icon active name="wifi" />
-//               </Button>
-//             </Left>
-//             <Body>
-//               <Text>Wi-Fi</Text>
-//             </Body>
-//             <Right>
-//               <Text>GeekyAnts</Text>
-//               <Icon active name="arrow-forward" />
-//             </Right>
-//           </ListItem>
-//           <ListItem icon>
-//             <Left>
-//               <Button style={{ backgroundColor: "#007AFF" }}>
-//                 <Icon active name="bluetooth" />
-//               </Button>
-//             </Left>
-//             <Body>
-//               <Text>Bluetooth</Text>
-//             </Body>
-//             <Right>
-//               <Text>On</Text>
-//               <Icon active name="arrow-forward" />
-//             </Right>
-//           </ListItem>
-//           </List>
-//         </Content>
-//       </Container>
-//     );
-//   }
-// }
-import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import React, { Component } from 'react';
+import { Container, Header,Body,Switch,Button, Content, List, ListItem, Text, Left, Right, Icon } from 'native-base';
 import I18n from '../src/I18n/index';
+import { View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import FooterSection from '../shared/FooterSection'
 
 export default class Setting extends Component {
-  constructor(props) {
+    constructor(props) {
     super(props);
     this.state = {
-    // changeLanguage: 'english',
+    changeLanguage: 'english',
   };
 }
-  heading = () => {
+
+  render() {
     return (
-      <View style={styles.mainTitle}>
-        <Text>Multi Language in React Native</Text>
-      </View>
-    );
-  };
-  button = () => {
-    return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
+      <Container>
+        <Content>
+          <List>
+          <ListItem icon  onPress={() => {
           Alert.alert(
             'Language Selection',
             'Multi language support',
             [
-              {
-                text: 'French',
-                onPress: () => {
-                  I18n.locale = 'fr-Us';
-                  this.setState({changeLanguage: 'English'});
-                },
-              },
               {
                 text: 'English',
                 onPress: () => {
@@ -112,25 +47,36 @@ export default class Setting extends Component {
             {cancelable: false},
           );
         }}>
-        <Text>Click Change Language</Text>
-      </TouchableOpacity>
-    );
-  };
+            <Left>
+              <Button style={{ backgroundColor: "#007AFF" }}>
+                <Icon active name="language" type='FontAwesome' />
+              </Button>
+            </Left>
+            <Body>
+              <Text>Language</Text>
+            </Body>
+            <Right>
+              <Text>العربية</Text>
+              <Icon active name="arrow-forward" />
+            </Right>
+          </ListItem>
+          </List>
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.heading()}
-        <View style={{flex: 2, width: '90%'}}>
-          <Text style={styles.text}>{I18n.t('greeting')}</Text>
-          <Text style={styles.text}>{I18n.t('title')}</Text>
-          <Text style={styles.text}>{I18n.t('Message')}</Text>
-          {this.button()}
-        </View>
-      </View>
+          {/* <View style={styles.container}>
+     <View style={{flex: 2, width: '90%'}}>
+       <Text style={styles.text}>{I18n.t('greeting')}</Text>
+       <Text style={styles.text}>{I18n.t('title')}</Text>
+       <Text style={styles.text}>{I18n.t('Message')}</Text>
+     </View>
+   </View> */}
+        </Content>
+        <FooterSection navigation={this.props.navigation} />
+      
+      </Container>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {backgroundColor: '#F5FCFF', flex: 1, alignItems: 'center'},

@@ -13,10 +13,20 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import com.airbnb.android.react.maps.MapsPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+                    new MapsPackage()
+            );
+        }
+        
         @Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;

@@ -58,16 +58,16 @@ export default class About extends Component {
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', padding: 15 }}>
                             <Button iconLeft style={styles.Btn} onPress={() => this._deckSwiper._root.swipeLeft()}>
                                 <Icon name="arrow-back" />
-                                <Text style={{ fontFamily: "Changa-Bold"}}>التالى</Text>
+                                <Text style={{ fontFamily: "Changa-Bold"}}>{I18n.t('next')}</Text>
                             </Button>
                             <Button iconRight style={styles.Btn} onPress={() => this._deckSwiper._root.swipeRight()}>
-                                <Text style={{ fontFamily: "Changa-Bold"}}>السابق</Text>
+                                <Text style={{ fontFamily: "Changa-Bold"}}>{I18n.t('Previous')}</Text>
                                 <Icon name="arrow-forward" />
 
                             </Button>
                         </View>
                         <View style={styles.para}>
-                            <Text style={styles.para}> {I18n.t('About')}</Text>
+                            <Text style={styles.para}> {I18n.t('AboutContent')}</Text>
                         </View>
                     </View>
 

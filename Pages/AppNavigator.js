@@ -222,6 +222,7 @@ import Profile from './Profile';
 import Appointments from './Appointments';
 import location from './location';
 import Chat from './Chat';
+import PatientHistory from './PatientHistory';
 
 import DrawerComp from './DrawerComp'
 
@@ -403,7 +404,6 @@ function AboutScreen({ navigation }) {
         component={About}
         options={{
           title: 'من نحن', //Set Header Title
-
         }} />
 
     </Stack.Navigator>
@@ -651,7 +651,39 @@ function QuestionsScreen({ navigation }) {
   );
 }
 
+function PatientHistoryScreen({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="PatientHistory"
+      screenOptions={{
+        headerRight: () => "",
+        headerStyle: {
+          backgroundColor: '#232323',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontFamily: "Changa-Bold",
+          textAlign: 'center',
+          fontSize: 18
+        },
+        headerLeft: () =>
+          <Icon
+            name='arrowleft'
+            type="AntDesign"
+            style={styles.arrow}
+            onPress={() => navigation.goBack()} />
+      }}>
+      <Stack.Screen
+        name="PatientHistory"
+        component={PatientHistory}
+        options={{
+          title: 'التاريخ الطبى ', //Set Header Title
 
+        }} />
+
+    </Stack.Navigator>
+  );
+}
 
 const AppNavigator = () => {
 
@@ -671,6 +703,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Reserve" component={ReserveScreen} options={{ headerShown: false }}></Stack.Screen>
           <Stack.Screen name="location" component={locationScreen} options={{ headerShown: false }}></Stack.Screen>
           <Stack.Screen name="Chat" component={ChatScreen} options={{ headerShown: false }}></Stack.Screen>
+          <Stack.Screen name="PatientHistory" component={PatientHistoryScreen} options={{ headerShown: false }}></Stack.Screen>
           
         </Stack.Navigator>
 

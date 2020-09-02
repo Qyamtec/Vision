@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 export default class location extends Component {
     // getInitialState() {
@@ -20,8 +20,19 @@ export default class location extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View>
                 <MapView
+        style={styles.map}
+       provider={PROVIDER_GOOGLE}
+         
+         initialRegion={{
+         latitude: 37.78825,
+         longitude: -122.4324,
+         latitudeDelta: 0.0922,
+         longitudeDelta: 0.0421}}
+      />
+
+                {/* <MapView
                     initialRegion={{
                         latitude: 37.78825,
                         longitude: -122.4324,
@@ -29,7 +40,7 @@ export default class location extends Component {
                         longitudeDelta: 0.0421
                     }}
                     style={styles.map}
-                />
+                /> */}
                    {/* <MapView
                 region={this.state.region}
                 onRegionChange={this.onRegionChange}
@@ -48,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     map: {
-        width: "100%",
-        height: "100%"
+        width: "50%",
+        height: "50%"
     }
 })

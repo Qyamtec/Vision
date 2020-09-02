@@ -85,7 +85,7 @@ export default class Profile extends Component {
               <TouchableOpacity style={styles.buttonContainer} onPress={()=>{this.props.navigation.navigate('Appointments')}}>
                 <Text style={styles.btnTxtx}>مواعيدي</Text>  
               </TouchableOpacity>              
-              <TouchableOpacity style={styles.buttonContainer} onPress={()=>{this.props.navigation.navigate('Profile')}}>
+              <TouchableOpacity style={styles.buttonContainer} onPress={()=>{this.props.navigation.navigate('PatientHistory')}}>
                 <Text style={styles.btnTxtx}> ملفى الطبي</Text> 
               </TouchableOpacity>
             </View>

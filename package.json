@@ -54,6 +54,7 @@
     "react-native-modal-dropdown": "^0.7.0",
     "react-native-paper": "^3.10.1",
     "react-native-reanimated": "^1.9.0",
+    "react-native-restart": "0.0.17",
     "react-native-safe-area-context": "^3.0.5",
     "react-native-screens": "^2.8.0",
     "react-native-timed-slideshow": "^1.2.1",

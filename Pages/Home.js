@@ -26,7 +26,10 @@ export default class Home extends Component {
             Extension: "",
             Server_Name: "",
             Appointments: [],
-
+            changeLanguage: 'english',
+            TotalInvoiceCount:"",
+            TotalFinishedInvoiceCount:"",
+            TotalNotFinishedInvoiceCount:""
         };
     }
     async componentDidMount() {
@@ -45,19 +48,41 @@ export default class Home extends Component {
         this.setState({ FTPFilePath: FTPFilePath })
         this.setState({ Extension: Extension })
         this.setState({ Server_Name: Server_Name })
-        FTP.setup("192.168.1.100", 21) //Setup host
-        FTP.login("FTUser", "asd@123").then(
-            (result) => {
-                FTP.list(".").then(
-                    (result) => {
-                        console.log(result);
-                    }
-                );
-            },
-            (error) => {
-                alert(error);
-            }
-        )
+       // FTP.setup("192.168.1.100", 21) //Setup host
+        // FTP.login("FTUser", "asd@123").then(
+        //     (result) => {
+        //         FTP.list(".").then(
+        //             (result) => {
+        //                 console.log(result);
+        //             }
+        //         );
+        //     },
+        //     (error) => {
+        //         alert(error);
+        //     }
+        // )
+        console.log(patientId)
+        fetch('http://192.168.1.100:91/api/PatientApi/PatientInvoice/' + patientId , {
+            method: 'GET'
+            //Request Type 
+        })
+            .then((response) => response.json())
+            //If response is in json then in success
+            .then((responseJson) => {
+                //Success 
+                console.log(responseJson)
+                this.setState({
+                    TotalInvoiceCount: responseJson.TotalInvoiceCount,
+                    TotalFinishedInvoiceCount:responseJson.TotalFinishedInvoiceCount,
+                    TotalNotFinishedInvoiceCount:responseJson.TotalNotFinishedInvoiceCount,
+                });
+            })
+            //If response is not in json then in error
+            .catch((error) => {
+                //Error 
+                // alert(JSON.stringify(error));
+                console.error(error);
+            });
     }
     render() {
         const arr= this.state.User_Name.split('"')
@@ -82,28 +107,25 @@ export default class Home extends Component {
                                 </View>
                                 <TouchableOpacity style={{ flexDirection: 'row', justifyContent: "flex-end", marginVertical: 20 }} onPress={() => { this.props.navigation.navigate('Profile') }}>
                                     {/* <Text style={styles.userName}> {this.props.getpatient()}</Text><Text style={styles.HelloTxt}>مرحبا بك  </Text> */}
-                                    <Text style={styles.userName}> {arr}</Text><Text style={styles.HelloTxt}> مرحبا بك </Text>
+                                    <Text style={styles.userName}> {arr}</Text><Text style={styles.HelloTxt}> {I18n.t('Hello')} </Text>
                                     <Image style={styles.patient} source={require('../assets/patient.png')} />
 
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: 'row' }}>
 
                                     <View style={styles.counterView}>
-                                        <Text style={styles.homee}>الزيارات</Text>
-                                        <Text style={styles.homee}>30</Text>
+                                        <Text style={styles.homee}> {I18n.t('TotalVisits')}</Text>
+                                        <Text style={styles.homee}>{this.state.TotalInvoiceCount}</Text>
                                     </View>
                                     <View style={styles.counterView}>
-                                        <Text style={styles.homee}>الزيارات</Text>
-                                        <Text style={styles.homee}>30</Text>
+                                        <Text style={styles.homee}> {I18n.t('NotFinishedVisits')}</Text>
+                                        <Text style={styles.homee}>{this.state.TotalNotFinishedInvoiceCount}</Text>
                                     </View>
                                     <View style={styles.counterView}>
-                                        <Text style={styles.homee}>الزيارات</Text>
-                                        <Text style={styles.homee}>30</Text>
+                                        <Text style={styles.homee}>{I18n.t('FinishedVisits')}</Text>
+                                        <Text style={styles.homee}>{this.state.TotalFinishedInvoiceCount}</Text>
                                     </View>
-                                    <View style={styles.counterView}>
-                                        <Text style={styles.homee}>الزيارات</Text>
-                                        <Text style={styles.homee}>30</Text>
-                                    </View>
+                                   
                                 </View>
                             </View>
                         </View>
@@ -184,7 +206,7 @@ const styles = StyleSheet.create({
     },
     homee: {
         color: '#000',
-        fontSize: 16,
+        fontSize: 14,
         textAlign: 'center',
         marginTop: 5,
         fontFamily: "Changa-Bold"

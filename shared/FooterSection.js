@@ -34,7 +34,7 @@ export default class FooterSection extends Component {
           <Button style={styles.ReserveBtn}  onPress={() =>  this.props.navigation.navigate('Reserve')}>
             <Icon name="date" type="Fontisto" style={{ marginBottom: 5, color:'#fff' }} />
     
-            <Text style={{ fontWeight: "bold",fontFamily: "Changa-Regular", fontSize: 16, flex:1, justifyContent:"center", textAlign:"center", color:'#fff' }}>احجز موعد</Text>
+            <Text style={{ fontWeight: "bold",fontFamily: "Changa-Regular", fontSize: 16, flex:1, justifyContent:"center", textAlign:"center", color:'#fff' }}>{I18n.t('ReserveAppointment')}</Text>
           </Button>
           <Button vertical onPress={() => this.props.navigation.navigate('Questions')}>
             <Icon active type="AntDesign" name="question" style={styles.iconStyle}/>

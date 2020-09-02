@@ -1,4 +1,4 @@
-
+import { Root } from "native-base";
 import React, { Component } from 'react';
 import { StyleSheet, Alert, View, FlatList, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -56,12 +56,14 @@ export default class Reserve extends Component {
                     // this.setState({ Times: ((element.AvaliableTimes.toString().split("T") )[1]).split(",")});
                     const av = element.AvaliableTimess.toString();
                     const vv = av.split(',');
+                    // const xx=new Array();
+                    // this.setState({Times:xx})
+                    this.state.Times.splice(0, this.state.Times.length);
+                    (vv).forEach((element, i) => {
 
-                       (vv).forEach((element,i) => { 
-
-                           this.state.Times.push({element})
-                          // alert( this.state.Times[i].value)
-                        })
+                        this.state.Times.push({ element })
+                        // alert( this.state.Times[i].value)
+                    })
 
                     //this.setState({ Times: vv });
 
@@ -92,9 +94,9 @@ export default class Reserve extends Component {
     }
     componentWillMount() {
         //GET request 
-        
+
         //fetch('http://vision.giize.com:90/api/PatientApi/GetOrgDoctors/1/6', {
-            fetch('http://192.168.1.100:91/api/PatientApi/GetOrgDoctors/1/6', {
+        fetch('http://192.168.1.100:91/api/PatientApi/GetOrgDoctors/1/6', {
             method: 'GET'
             //Request Type 
         })
@@ -131,20 +133,15 @@ export default class Reserve extends Component {
         return this.state.Times.map(function (time, i) {
             return (
                 <View style={styles.times} >
-
-
                     <Button style={styles.timeTxt}
                         onPress={() => {
                             btn.setState({
                                 showAlert: true,
-                                SelectedTime: time
+                                SelectedTime: time.element
                             });
                         }}>
-                        <Text>{time}</Text>
+                        <Text>{time.element}</Text>
                     </Button>
-
-
-
                 </View>
             );
         });
@@ -154,12 +151,13 @@ export default class Reserve extends Component {
     render() {
         const { showAlert } = this.state;
         return (
-            // <Container>
+            <Root>
+
             <View style={styles.content}>
+
                 <ScrollView>
 
                     <Container style={styles.container}>
-
 
                         <AwesomeAlert
                             show={showAlert}
@@ -176,17 +174,23 @@ export default class Reserve extends Component {
                             confirmButtonColor="#DD6B55"
                             onCancelPressed={() => {
                                 this.hideAlert();
+                                Toast.show({
+                                    text: "لم يتم حجز المعاد",
+                                    buttonText: "",
+                                    position: "top",
+                                    type: "danger"
+                              })
                             }}
                             onConfirmPressed={() => {
                                 this.hideAlert();
                                 selectedDate = this.state.date
                                 // console.log(selectedDate.setHours("17"))
                                 // console.log(((selectedDate.getFullYear() + '-' + selectedDate.getMonth() + '-' + (selectedDate.getDate() + 1))).setTime(this.state.SelectedTime.toString()));
-                                console.log(this.state.patientId )
+                                console.log(this.state.patientId)
                                 console.log(this.state.DoctorId)
-                                console.log( (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString())
-                                fetch('http://192.168.1.100:91/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/'+this.state.patientId+'/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
-                             //   fetch('http://vision.giize.com:90/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/11/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
+                                console.log((selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString())
+                                fetch('http://192.168.1.100:91/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/' + this.state.patientId + '/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
+                                    //   fetch('http://vision.giize.com:90/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/11/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
                                     // fetch("http://192.168.1.100:90/api/AppointmentApi/addappointment" 
                                     // fetch("http://192.168.1.100:90/api/AppointmentApi/Addappointment/2020-06-22/11/14/2020-06-23"
                                     , {
@@ -195,9 +199,27 @@ export default class Reserve extends Component {
                                     }
                                 )
                                     .then((response) => {
-                                        alert(JSON.stringify(response.ok))
+                                        // alert(JSON.stringify(response.ok))
+                                        if(response.ok==true)
+                                        {
+                                            Toast.show({
+                                                text: "تم حجز المعاد",
+                                                buttonText: "",
+                                                position: "top",
+                                                type: "success"
+                                          })
+                                        }
+                                        else{
+                                            Toast.show({
+                                                text: "لم يتم حجز المعاد",
+                                                buttonText: "",
+                                                position: "top",
+                                                type: "danger"
+                                          })
+                                        }
                                         this.getAvailableTimes();
                                         this.AvailableTimes()
+                                       
                                     }
                                     )
                                     .catch((error) => {
@@ -207,8 +229,6 @@ export default class Reserve extends Component {
                                     });
                             }}
                         />
-
-
                         <DropDownPicker
                             items={this.state.Doctors}
                             defaultNull={this.state.Doctors === null}
@@ -218,8 +238,6 @@ export default class Reserve extends Component {
                                 this.setState({ DoctorId: item.value });
                                 this.getAvailableTimes();
                                 this.AvailableTimes();
-
-
                             }}
                         />
                         <View style={styles.Date}>
@@ -236,11 +254,9 @@ export default class Reserve extends Component {
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
                                 onDateChange={(date) => {
-
                                     this.setState({
                                         date: date
                                     });
-
                                     this.getAvailableTimes()
                                 }}
                                 disabled={false}
@@ -254,22 +270,13 @@ export default class Reserve extends Component {
 
                         <View style={styles.row}>
                             {this.AvailableTimes()}
-                        </View>
-
-                        {/* <Button info style={styles.btn}
-                    onPress={() =>
-                       
-                        alert(this.state.SelectedTime)
-                    }>
-                    <Icon name='arrow-back' />
-                    <Text>احجز الآن</Text>
-                </Button> */}
-
+                        </View> 
                     </Container>
                 </ScrollView>
                 <FooterSection navigation={this.props.navigation} />
             </View>
-            //   </Container>
+            </Root>
+
         )
     }
 }

@@ -1,166 +1,4 @@
-
-// import React, { Component } from 'react';
-// import {
-//     StyleSheet,
-//     View,
-//     TextInput,
-//     TouchableHighlight,
-//     Alert,
-//     Image,
-//     TouchableOpacity
-// } from 'react-native';
-// import ListView from 'deprecated-react-native-listview';
-// import { Container, Header, Content, Card, CardItem, Text, Body, Button, Icon } from "native-base";
-
-// import AsyncStorage from '@react-native-community/async-storage';
-// import FooterSection from '../shared/FooterSection';
-
-// export default class Appointments extends Component {
-
-//     constructor(props) {
-//         super(props);
-//         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-//         this.state = {
-//             Appointments: [],
-//             dataSource: ds.cloneWithRows([
-//                 { image: "https://bootdey.com/img/Content/avatar/avatar1.png" },
-//                 { image: "https://bootdey.com/img/Content/avatar/avatar6.png" },
-//                 { image: "https://bootdey.com/img/Content/avatar/avatar2.png" },
-//                 { image: "https://bootdey.com/img/Content/avatar/avatar3.png" },
-//                 { image: "https://bootdey.com/img/Content/avatar/avatar4.png" },
-//             ]),
-//         };
-//     }
-//     async componentDidMount() {
-//         const tokens = await AsyncStorage.getItem('patient');
-//         const patientId = await AsyncStorage.getItem('patientId');
-//         console.log(tokens); // You can see 'myid'
-
-//         //GET request 
-//         fetch('http://192.168.1.100:91/api/PatientApi/GetPatientAppointments/' + patientId, {
-//             method: 'GET'
-//             //Request Type 
-//         })
-//             .then((response) => response.json())
-//             //If response is in json then in success
-//             .then((responseJson) => {
-//                 //Success 
-//                 this.setState({
-//                     Appointments: responseJson
-//                 });
-
-//                 console.log(responseJson);
-//             })
-//             //If response is not in json then in error
-//             .catch((error) => {
-//                 //Error 
-//                 // alert(JSON.stringify(error));
-//                 console.error(error);
-//             });
-
-
-//     }
-//     render() {
-//         return (
-//             <Container>
-//                 <View style={styles.content}>
-//                     {
-//                         this.state.Appointments.map((u, i) => {
-//                             return (
-
-//                                 <View style={styles.container}>
-//                                     <Image style={styles.image} resizeMode="cover" source={require("../assets/img.png")} />
-//                                     <Card style={styles.card} >
-//                                         <CardItem bordered>
-//                                             <Body>
-//                                                 <View key={i} style={styles.user} >
-//                                                     <View style={styles.boxContent}>
-//                                                         <Text style={styles.title}>{u.AppointmentStatu}</Text>
-//                                                         <Text style={styles.description}>{u.Appointment_ID}</Text>
-//                                                         <View style={styles.buttons}>
-//                                                             <TouchableHighlight style={[styles.button, styles.confirmed]} onPress={() => this.clickListener('login')}>
-//                                                                 <Icon type="AntDesign" name="checkcircle" style={styles.icon}></Icon>
-//                                                             </TouchableHighlight>
-
-//                                                             <TouchableHighlight style={[styles.button, styles.canceled]} onPress={() => this.clickListener('login')}>
-//                                                                 <Icon type="AntDesign" name="closecircle" style={styles.icon}></Icon>
-//                                                             </TouchableHighlight>
-
-//                                                         </View>
-//                                                     </View>
-
-//                                                 </View>
-//                                             </Body>
-//                                         </CardItem>
-//                                     </Card>
-//                                 </View>
-
-//                             );
-//                         })
-//                     }
-//                     <FooterSection navigation={this.props.navigation} />
-//                 </View>
-//             </Container>
-//         );
-
-//     }
-// }
-
-// const styles = StyleSheet.create({
-//     image: {
-//         width: 100,
-//         height: 100,
-//         borderRadius: 20
-//     },
-//     box: {
-//         padding: 20,
-//         marginTop: 5,
-//         marginBottom: 5,
-//         backgroundColor: 'white',
-//         flexDirection: 'row',
-//     },
-//     boxContent: {
-//         flex: 1,
-//         flexDirection: 'column',
-//         alignItems: 'flex-start',
-//         marginLeft: 10,
-//     },
-//     title: {
-//         fontSize: 18,
-//         color: "#151515",
-//     },
-//     description: {
-//         fontSize: 15,
-//         color: "#646464",
-//     },
-//     buttons: {
-//         flexDirection: 'row',
-//     },
-//     button: {
-//         height: 35,
-//         flexDirection: 'row',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         borderRadius: 10,
-//         width: 50,
-//         marginRight: 5,
-//         marginTop: 5,
-//     },
-//     icon: {
-//         fontSize: 20,
-//         color: "#fff"
-//     },
-//     confirmed: {
-//         backgroundColor: "green",
-//     },
-//     canceled: {
-//         backgroundColor: "red",
-//     },
-//     message: {
-//         backgroundColor: "#228B22",
-//     },
-// });
-
+import { Root } from "native-base";
 import React, { Component } from 'react';
 import {
     Platform,
@@ -168,13 +6,17 @@ import {
     TouchableOpacity,
     View,
     Image,
-    ScrollView
+    ScrollView, ImageBackground, Dimensions
 } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
-import { Container, Header, Content, Card, CardItem, Text, Body, Button, Icon } from "native-base";
+import { Container, Header, Content, Card, CardItem, Alert, Text, Body, Button, Icon, Toast } from "native-base";
 
 import AsyncStorage from '@react-native-community/async-storage';
 import FooterSection from '../shared/FooterSection';
+import imgBG from '../assets/bg12.jpg'
+import { interpolate } from 'react-native-reanimated';
+const { width: WIDTH } = Dimensions.get('window')
+
 
 export default class Appointments extends Component {
 
@@ -182,6 +24,7 @@ export default class Appointments extends Component {
         super(props);
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
+            patientId: Number,
             Appointments: [],
             dataSource: ds.cloneWithRows([
                 { image: "https://bootdey.com/img/Content/avatar/avatar1.png" },
@@ -195,6 +38,7 @@ export default class Appointments extends Component {
     async componentDidMount() {
         const tokens = await AsyncStorage.getItem('patient');
         const patientId = await AsyncStorage.getItem('patientId');
+        this.setState({ patientId: patientId });
         console.log(tokens); // You can see 'myid'
 
         //GET request 
@@ -221,68 +65,242 @@ export default class Appointments extends Component {
 
 
     }
-    render() {
+    contentdata() {
         return (
-            <Container>
-                <View style={styles.content}>
-                    <ScrollView>
-                        {
-                            this.state.Appointments.map((u, i) => {
-                                return (
+            <ScrollView>
+                {
+                    this.state.Appointments.map((u, i) => {
+                        return (
+                            <View style={styles.container}>
+                                <View style={styles.box}>
+                                    <View style={styles.info}>
+                                        <View key={i} style={styles.card} >
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                    <Text style={styles.name}>قسم {u.Department_Name_Ar}</Text>
+                                                    <Icon
+                                                        name='location'
+                                                        type="EvilIcons"
+                                                        style={styles.icon}
+                                                        size={10}
+                                                    />
+                                                </View>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                    <Text style={styles.name}> {u.Start_Time}</Text>
+                                                    <Icon
+                                                        name='clock'
+                                                        type="EvilIcons"
+                                                        style={styles.icon}
+                                                        size={10}
+                                                        color={'rbga(255,255,255,0.7)'}
+                                                    />
+                                                    {/* <Text style={styles.name}>{I18n.t('Virtualclinic')}</Text> */}
+                                                </View>
 
-                                    <View style={styles.container}>
-                                        <View style={styles.box}>
-                                            {/* <Image style={styles.image} source={{uri:user.image}} /> */}
-                                            <View style={styles.info}>
-                                                <View key={i} style={styles.user} >
+                                            </View>
 
-                                                    <Text style={styles.name}> لديك موعد الساعة {u.Start_Time}   </Text>
-                                                    <Text style={styles.name}> فى قسم  {u.Department_Name_Ar} </Text>
-                                                    <Text style={styles.name}> طبيب {u.Full_Name_Ar} </Text>
-                                                    <Text style={styles.name}>{u.AppointmentStatus_Name_Ar}</Text>
-                                                    <View style={styles.row}>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                                                        <View style={styles.btnContainer}>
-                                                            <Button style={styles.cancel} onPress={() => { console.log('الغاء الموعد') }}>
-                                                                <Text style={styles.btnTxt}>الغاء الموعد</Text>
-                                                            </Button>
-                                                        </View>
+                                                <Text style={styles.name}> {u.Full_Name_Ar}</Text>
+                                                <Text style={styles.name}> id {u.Appointment_ID}</Text>
+                                                <Text style={styles.name}> الحال{u.AppointmentStatus_Name_Ar}</Text>
 
-                                                        <View style={styles.btnContainer}>
-                                                            <Button style={styles.confirm} onPress={() => { console.log('تأكيد الموعد') }}>
-                                                                <Text style={styles.btnTxt}>تأكيد الموعد</Text>
-                                                            </Button>
-                                                        </View>
-                                                    </View>
+                                                <Icon
+                                                    name='doctor'
+                                                    type="Fontisto"
+                                                    style={styles.icon}
+                                                    size={10}
+                                                />
+                                            </View>
+                                            <View style={styles.row}>
+
+                                                <View style={styles.btnContainer}>
+                                                    {/*  this.CanceledAppointment(u.Appointment_ID) } */}
+                                                    <Button style={styles.cancel} onPress={() => { this.CanceledAppointment(u.Appointment_ID) }}>
+                                                        <Text style={styles.btnTxt}>الغاء الموعد</Text>
+                                                    </Button>
+                                                </View>
+
+                                                <View style={styles.btnContainer}>
+                                                    {/*  this.ConfirmedAppointment(u.Appointment_ID)  */}
+                                                    <Button style={styles.confirm} onPress={() => { this.ConfirmedAppointment(u.Appointment_ID) }}>
+                                                        <Text style={styles.btnTxt}>تأكيد الموعد</Text>
+                                                    </Button>
                                                 </View>
                                             </View>
                                         </View>
                                     </View>
-                                )
-                            })
-                        }
+                                </View>
+                            </View>
 
-                    </ScrollView>
-                    <FooterSection navigation={this.props.navigation} />
-                </View>
-            </Container>
+                        )
+                    })
+                }
+            </ScrollView>
+        )
+    }
+    emptyData() {
+        return (
+            <ScrollView>
+                {
+                    <View style={styles.container}>
+                        <Text style={{ textAlign: 'center' }}>No Data Found</Text>
+                    </View>
+                }
+            </ScrollView>
+        )
+    }
+    checkContent() {
+        if (this.state.Appointments.length != 0) {
+            return (
+                this.contentdata()
+            )
+        }
+        else if (this.state.Appointments.length == 0) {
+            return (
+                this.emptyData()
+            )
+        }
+    }
+
+    CanceledAppointment(AppointmentID) {
+        fetch('http://192.168.1.100:91/api/PatientApi/CanceledAppointment/' + this.state.patientId + '/' + AppointmentID, {
+            method: 'GET'
+            //Request Type 
+        })
+            .then((response) => response.json())
+            //If response is in json then in success
+            .then((responseJson) => {
+                //Success 
+                console.log(responseJson)
+                fetch('http://192.168.1.100:91/api/PatientApi/GetPatientAppointments/' + this.state.patientId + '/1', {
+                    method: 'GET'
+                    //Request Type 
+                })
+                    .then((response) => response.json())
+                    //If response is in json then in success
+                    .then((responseJson) => {
+                        //Success 
+                        this.setState({
+                            Appointments: responseJson
+                        });
+
+                        console.log(responseJson);
+                    })
+                    //If response is not in json then in error
+                    .catch((error) => {
+                        //Error 
+                        // alert(JSON.stringify(error));
+                        console.error(error);
+                    });
+                this.checkContent(); 
+                 Toast.show({
+                    text: "تم الغاء المعاد",
+                    buttonText: "",
+                    position: "top",
+                    type: "danger"
+                })
+                //  GetAppointments();
+            })
+            //If response is not in json then in error
+            .catch((error) => {
+                //Error 
+                console.error(error);
+            });
+    }
+    ConfirmedAppointment(AppointmentID) {
+        console.log(AppointmentID)
+        console.log(this.state.patientId)
+        fetch('http://192.168.1.100:91/api/PatientApi/ConfirmedAppointment/' + this.state.patientId + '/' + AppointmentID, {
+            method: 'GET'
+            //Request Type 
+        })
+            .then((response) => response.json())
+            //If response is in json then in success
+            .then((responseJson) => {
+                //Success 
+                console.log(responseJson)
+                fetch('http://192.168.1.100:91/api/PatientApi/GetPatientAppointments/' + this.state.patientId + '/1', {
+                    method: 'GET'
+                    //Request Type 
+                })
+                    .then((response) => response.json())
+                    //If response is in json then in success
+                    .then((responseJson) => {
+                        //Success 
+                        this.setState({
+                            Appointments: responseJson
+                        });
+
+                        console.log(responseJson);
+                    })
+                    //If response is not in json then in error
+                    .catch((error) => {
+                        //Error 
+                        // alert(JSON.stringify(error));
+                        console.error(error);
+                    });
+                this.checkContent();
+                console.log('confirmed')
+                Toast.show({
+                    text: "تم تأكيد المعاد",
+                    buttonText: "",
+                    position: "top",
+                    type: "success"
+                })
+                //  GetAppointments();
+            })
+            //If response is not in json then in error
+            .catch((error) => {
+                //Error 
+                console.error(error);
+            });
+    }
+    render() {
+        return (
+            <Root>
+
+                <Container>
+                    <ImageBackground source={imgBG} style={styles.backgroundContainer}>
+                        <View style={styles.content}>
+
+                            {this.checkContent()}
+                            <FooterSection navigation={this.props.navigation} />
+                        </View>
+                    </ImageBackground>
+                </Container>
+            </Root>
+
         );
 
     }
 }
 
 const styles = StyleSheet.create({
+    backgroundContainer: {
+        flex: 1,
+        backgroundColor: '#f5fcff',
+        justifyContent: "center",
+        alignItems: "center",
+        width: null,
+        height: null,
+    },
     container: {
         flex: 1,
-        backgroundColor: '#EEEEEE',
+        width: WIDTH,
+        backgroundColor: 'transparent',
     },
     content: {
         flex: 1,
-        height: 300
+        height: 300,
+        paddingTop: 20,
+        backgroundColor: 'transparent',
+
     },
     icon: {
-        width: 30,
-        height: 30,
+        // width: 30,
+        // height: 30,
+        color: '#517FFF'
     },
     image: {
         width: 100,
@@ -290,7 +308,7 @@ const styles = StyleSheet.create({
     },
     box: {
         marginBottom: 20,
-        borderRadius:25,
+        borderRadius: 25,
         backgroundColor: 'white',
         flexDirection: 'row',
         shadowColor: 'black',
@@ -299,18 +317,31 @@ const styles = StyleSheet.create({
             height: 1,
             width: -2
         },
-        elevation: 2
+        elevation: 2,
     },
     info: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'transparent',
+    },
+    card: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
     },
     name: {
-        fontSize: 20,
+        fontSize: 18,
         marginTop: 10,
         color: '#333',
+        fontFamily: "Changa-Regular",
+
+    },
+    gray: {
+        fontSize: 18,
+        marginTop: 10,
+        color: 'gray',
         fontFamily: "Changa-Regular",
 
     },
@@ -328,17 +359,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    btnTxt:{
+    btnTxt: {
         fontFamily: "Changa-Bold",
     },
     confirm: {
         borderRadius: 15,
-        backgroundColor: "green"
+        // backgroundColor: "#33CC66",
+        backgroundColor: "#517FFF"
     },
     cancel: {
         borderRadius: 20,
         backgroundColor: "red",
-        
+
     },
     iconFonts: {
         color: 'gray',

@@ -1,5 +1,4 @@
 import I18n, {getLanguages} from 'react-native-i18n';
-
 import ar from './ar';
 import en from './en';
 import fr from './fr';
