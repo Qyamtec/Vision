@@ -84,7 +84,7 @@ export default class Appointments extends Component {
         const patientId = await AsyncStorage.getItem('patientId');
         console.log(patientId)
         //GET request 
-        fetch('http://192.168.1.100:91/api/PatientApi/PatientHistory/' + patientId, {
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/PatientHistory/' + patientId, {
             method: 'GET'
             //Request Type 
         })

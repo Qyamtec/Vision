@@ -3,10 +3,12 @@ import { Root } from "native-base";
 import AsyncStorage from '@react-native-community/async-storage';
 
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground,TextInput, ScrollView, Image, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ImageBackground, TextInput, ScrollView, Image, Dimensions, Text, TouchableOpacity, Alert } from 'react-native';
 import imgBG from '../assets/bg12.jpg'
 import logo from '../assets/Vision.jpg'
-import { Icon, Button, Toast,alert } from 'native-base';
+import SaudiaLogo from '../assets/Saudia.png'
+import AmericaLogo from '../assets/america.png'
+import { Icon, Button, Toast, alert } from 'native-base';
 import I18n from '../src/I18n/index';
 
 // import startMainTabs from "../Pages/Home";
@@ -56,7 +58,7 @@ export default class Login extends Component {
     }
     BtnLoginfun() {
         //  console.log(this.state.userName)
-        fetch('http://192.168.1.100:91/api/PatientApi/CheckUserIfExist/' + this.state.userName + '/' + this.state.password, { method: 'GET' })
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/CheckUserIfExist/' + this.state.userName + '/' + this.state.password, { method: 'GET' })
             //   fetch('https://vision.giize.com:90/api/PatientApi/CheckUserIfExist/' + this.state.userName + '/' + this.state.password, { method: 'GET' })     
             .then((response) => response.json())
             .then((responseJson) => {
@@ -114,7 +116,7 @@ export default class Login extends Component {
                 // alert(JSON.stringify(error));
                 console.error(error);
             });
-   
+
     }
 
     render() {
@@ -126,117 +128,98 @@ export default class Login extends Component {
             <Root>
 
                 <ImageBackground source={imgBG} style={styles.backgroundContainer}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            Alert.alert(
-                                'Language Selection',
-                                'Multi language support',
-                                [
-                                    {
-                                        text: 'French',
-                                        onPress: () => {
-                                            I18n.locale = 'fr-Us';
-                                            this.setState({ changeLanguage: 'English' });
-                                        },
-                                    },
-                                    {
-                                        text: 'English',
-                                        onPress: () => {
-                                            I18n.locale = 'en-Us';
-                                            this.setState({ changeLanguage: 'English' });
-                                        },
-                                    },
-                                    {
-                                        text: 'Arabic',
-                                        onPress: () => {
-                                            I18n.locale = 'ar-Us';
-                                            this.setState({ changeLanguage: 'arabic' });
-                                        },
-                                    },
-                                    {
-                                        text: 'Cancel',
-                                        onPress: () => {
-                                            console.log('Cancel Pressed');
-                                        },
-                                        style: 'cancel',
-                                    },
-                                ],
-                                { cancelable: false },
-                            );
-                        }}>
-                        <Text>Click Change Language</Text>
-                    </TouchableOpacity>
-                    <View style={styles.logoContainer}>
-                        <Image source={logo} style={styles.logo} />
-                        {/* <Text style={styles.logoTxt}>تسجيل الدخول</Text> */}
-                    </View>
-                    <View style={styles.inputContainer}>
-                      
-                        <TextInput
-                            style={styles.inputTxt}
-                            placeholder={I18n.t('UserName')}
-                            placeholderTextColor={'rgba (255, 255, 255, 0.7)'}
-                            underlineColorAndroid="transparent"
-                            // value={this.state.userName}
-                            name="username"
-                            onChangeText={(text) => this.setState({ userName: text })}
-                        />
-                        <Icon
-                            name='person-outline'
-                            type="MaterialIcons"
-                            style={styles.inputIcon}
-                            size={28}
-                            color={'rbga(255,255,255,0.7)'}
-                        />
+
+                    <View style={{ flexDirection: 'row', marginBottom: 20, marginHorizontal: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                I18n.locale = 'ar-Us';
+                                this.setState({ changeLanguage: 'arabic' });
+                            }}>
+                            <Image source={SaudiaLogo} style={styles.flag} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                I18n.locale = 'en-Us';
+                                this.setState({ changeLanguage: 'English' });
+                            }}>
+                            <Image source={AmericaLogo} style={styles.flag} />
+                        </TouchableOpacity>
+                        {/* <Text>{I18n.t('chooseLang')}</Text> */}
 
                     </View>
-                    {/* <Text>{this.state.userName}</Text> */}
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.btnEye} onPress={this.onPress1.bind()} >
+
+
+                    <View style={{ alignItems: "center", }}>
+                        <View style={styles.logoContainer}>
+                            <Image source={logo} style={styles.logo} />
+                            {/* <Text style={styles.logoTxt}>تسجيل الدخول</Text> */}
+                        </View>
+                        <View style={styles.inputContainer}>
+
+                            <TextInput
+                                style={styles.inputTxt}
+                                placeholder={I18n.t('UserName')}
+                                placeholderTextColor={'rgba (255, 255, 255, 0.7)'}
+                                underlineColorAndroid="transparent"
+                                // value={this.state.userName}
+                                name="username"
+                                onChangeText={(text) => this.setState({ userName: text })}
+                            />
                             <Icon
+                                name='person-outline'
+                                type="MaterialIcons"
+                                style={styles.inputIcon}
+                                size={28}
+                                color={'rbga(255,255,255,0.7)'}
+                            />
 
-                                name={this.state.showPassProp == true ? 'eye-off' : 'eye'}
+                        </View>
+                        {/* <Text>{this.state.userName}</Text> */}
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.btnEye} onPress={this.onPress1.bind()} >
+                                <Icon
+
+                                    name={this.state.showPassProp == true ? 'eye-off' : 'eye'}
+                                    type="Feather"
+                                    style={styles.inputIconPass}
+                                    size={5}
+                                    color={'rbga(255,255,255,0.7)'}
+                                    required={true}
+
+                                />
+                            </Text>
+                            <TextInput
+                                style={styles.inputTxt}
+                                secureTextEntry={this.state.showPassProp}
+                                placeholder={I18n.t('PASS')}
+                                placeholderTextColor={'rgba (255, 255, 255, 0.7)'}
+                                underlineColorAndroid="transparent"
+                                onChangeText={(text) => this.setState({ password: text })}
+                                //  + this.state.SelectedTime +"/1/"+this.state.DoctorId+"/"+this.state.date)
+                                required={true}
+                            />
+                            <Icon
+                                name='lock'
                                 type="Feather"
                                 style={styles.inputIconPass}
                                 size={5}
                                 color={'rbga(255,255,255,0.7)'}
-                                required={true}
-
                             />
-                        </Text>
-                        <TextInput
-                            style={styles.inputTxt}
-                            secureTextEntry={this.state.showPassProp}
-                            placeholder={I18n.t('PASS')}
-                            placeholderTextColor={'rgba (255, 255, 255, 0.7)'}
-                            underlineColorAndroid="transparent"
-                            onChangeText={(text) => this.setState({ password: text })}
-                            //  + this.state.SelectedTime +"/1/"+this.state.DoctorId+"/"+this.state.date)
-                            required={true}
-                        />
-                        <Icon
-                            name='lock'
-                            type="Feather"
-                            style={styles.inputIconPass}
-                            size={5}
-                            color={'rbga(255,255,255,0.7)'}
-                        />
 
+                        </View>
+                        <Button style={styles.btnLogin} onPress={() => this.BtnLoginfun()}>
+                            <Text style={styles.txt}>{I18n.t('Login')}</Text>
+                        </Button>
+                        <Button onPress={() => { this.props.navigation.navigate('Home') }} >
+                            {/* <Text style={styles.txt}>تخطي </Text> */}
+                        </Button>
+
+                        <View style={{ flexDirection: "row", margin: 9 }}>
+                            <Text style={styles.registerLink} onPress={() => this.props.navigation.navigate('Register')} > {I18n.t('NewRegistration')}</Text>
+                            <Text style={styles.register} >{I18n.t('Youdonothaveanaccount')} </Text>
+
+                        </View>
                     </View>
-                    <Button style={styles.btnLogin} onPress={() => this.BtnLoginfun()}>
-                        <Text style={styles.txt}>{I18n.t('Login')}</Text>
-                    </Button>
-                    <Button onPress={() => { this.props.navigation.navigate('Home') }} >
-                        <Text style={styles.txt}>تخطي </Text>
-                    </Button>
-
-                    <View style={{ flexDirection: "row", margin: 9 }}>
-                        <Text style={styles.registerLink} onPress={() => this.props.navigation.navigate('Register')} > {I18n.t('NewRegistration')}</Text>
-                        <Text style={styles.register} >{I18n.t('Youdonothaveanaccount')} </Text>
-
-                    </View>
-
                 </ImageBackground>
             </Root>
 
@@ -247,8 +230,9 @@ const styles = StyleSheet.create({
     backgroundContainer: {
         flex: 1,
         backgroundColor: '#f5fcff',
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: "flex-start",
+        paddingVertical: 50,
+        alignItems: "flex-end",
         width: null,
         height: null,
     },
@@ -256,9 +240,15 @@ const styles = StyleSheet.create({
         width: 120,
         height: 120
     },
+    flag: {
+        width: 40,
+        height: 20,
+        marginHorizontal: 10,
+        borderRadius: 8
+    },
     logoContainer: {
         alignItems: "center",
-        marginBottom: 50
+        marginVertical: 50
     },
     logoTxt: {
         color: "blue",
@@ -288,7 +278,10 @@ const styles = StyleSheet.create({
         top: 10,
         right: 37,
         // paddingRight:50
-
+    },
+    langIcon: {
+        marginHorizontal: 10,
+        marginVertical: 5
     },
     inputIconPass: {
         position: "absolute",

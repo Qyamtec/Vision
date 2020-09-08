@@ -41,4 +41,6 @@ TotalVisits:'جميع الزيارات' ,
 NotFinishedVisits:' الزيارات المستمرة' ,
 FinishedVisits:' الزيارات المنتهية' ,
 RegisterSucess:'تم الحجز بنجاح',
+chooseLang:'اختر اللغة',
+reserveNow:' احجز الآن',
 };

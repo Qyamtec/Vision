@@ -42,7 +42,7 @@ export default class Appointments extends Component {
         console.log(tokens); // You can see 'myid'
 
         //GET request 
-        fetch('http://192.168.1.100:91/api/PatientApi/GetPatientAppointments/' + patientId + '/1', {
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/GetPatientAppointments/' + patientId + '/1', {
             method: 'GET'
             //Request Type 
         })
@@ -164,7 +164,7 @@ export default class Appointments extends Component {
     }
 
     CanceledAppointment(AppointmentID) {
-        fetch('http://192.168.1.100:91/api/PatientApi/CanceledAppointment/' + this.state.patientId + '/' + AppointmentID, {
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/CanceledAppointment/' + this.state.patientId + '/' + AppointmentID, {
             method: 'GET'
             //Request Type 
         })
@@ -173,7 +173,7 @@ export default class Appointments extends Component {
             .then((responseJson) => {
                 //Success 
                 console.log(responseJson)
-                fetch('http://192.168.1.100:91/api/PatientApi/GetPatientAppointments/' + this.state.patientId + '/1', {
+                fetch('https://visionapp.qyamtec.com/api/PatientApi/GetPatientAppointments/' + this.state.patientId + '/1', {
                     method: 'GET'
                     //Request Type 
                 })
@@ -211,7 +211,7 @@ export default class Appointments extends Component {
     ConfirmedAppointment(AppointmentID) {
         console.log(AppointmentID)
         console.log(this.state.patientId)
-        fetch('http://192.168.1.100:91/api/PatientApi/ConfirmedAppointment/' + this.state.patientId + '/' + AppointmentID, {
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/ConfirmedAppointment/' + this.state.patientId + '/' + AppointmentID, {
             method: 'GET'
             //Request Type 
         })
@@ -220,7 +220,7 @@ export default class Appointments extends Component {
             .then((responseJson) => {
                 //Success 
                 console.log(responseJson)
-                fetch('http://192.168.1.100:91/api/PatientApi/GetPatientAppointments/' + this.state.patientId + '/1', {
+                fetch('https://visionapp.qyamtec.com/api/PatientApi/GetPatientAppointments/' + this.state.patientId + '/1', {
                     method: 'GET'
                     //Request Type 
                 })

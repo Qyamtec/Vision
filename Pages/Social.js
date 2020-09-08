@@ -13,7 +13,6 @@ import {
 import ListView from 'deprecated-react-native-listview';
 import { Icon } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
-import FTP from 'react-native-ftp';
 
 export default class Social extends Component {
 

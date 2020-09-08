@@ -41,4 +41,8 @@ TotalVisits:'Total Visits' ,
 NotFinishedVisits:'Continue Visits' ,
 FinishedVisits:'Finished Visits' ,
 RegisterSucess:"Reservation success",
+chooseLang:'Choose Language',
+reserveNow:'  Reserve',
+
+
 };

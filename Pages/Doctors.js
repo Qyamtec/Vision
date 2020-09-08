@@ -3,47 +3,50 @@ import { StyleSheet, View, Image, ScrollView } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Icon } from "native-base";
 import { Dimensions } from 'react-native';
 import FooterSection from '../shared/FooterSection';
+import I18n from '../src/I18n/index';
 
 
 const users = [
     {
         name: 'د.سلطان الزهيري',
         desc: 'استشاري الماء الأزرق والماء الأبيض وعمليات تصحيح النظر',
-        avatar:  require('../assets/doctors/7.jpg')
+        avatar:  require('../assets/doctors/7.png')
     },
     {
         name: 'د.سلطان الرشيدي',
         desc: 'استشاري القرنية والماء الأبيض وعمليات تصحيح النظر',
-        avatar: require('../assets/doctors/2.jpg')
+        avatar: require('../assets/doctors/2.png')
     },
     {
         name: 'د.أحمد المهيلب',
         desc: 'استشاري جراحات الشبكية والماء الأبيض وعمليات تصحيح النظر',
-        avatar: require('../assets/doctors/1.jpg')
+        avatar: require('../assets/doctors/1.png')
     },
     {
         name: 'د.سعد الذيابي',
         desc: 'استشاري عيون اللأطفال والحول والماء الأبيض وعمليات تصحيح النظر',
-        avatar: require( '../assets/doctors/6.jpg')
+        avatar: require( '../assets/doctors/9.png')
     },
     {
         name: 'د.دورا الحركان',
         desc: 'استشاري عيون اللأطفال والحول لدى الكبار والأطفال',
-        avatar:require( '../assets/img.png')    },
-    {
-        name: 'د.على القيضي',
-        desc: ' أخصائي أول بصريات ومتخصص فى العدسات اللاصقة والمعينات البصرية',
-        avatar: require( '../assets/doctors/1.jpg')
+        avatar: require( '../assets/doctors/8.png')
+
     },
+    // {
+    //     name: 'د.على القيضي',
+    //     desc: ' أخصائي أول بصريات ومتخصص فى العدسات اللاصقة والمعينات البصرية',
+    //     avatar: require( '../assets/doctors/1.png')
+    // },
     {
         name: 'د.عبدالرحمن الحربي',
         desc: ' أخصائي بصريات اكلينيكية ومتخصص فى العدسات اللاصقة والمعينات البصرية',
-        avatar: require( '../assets/doctors/4.jpg')
+        avatar: require( '../assets/doctors/4.png')
     },
     {
         name: 'د.بريا هاري',
         desc: 'أخصائية أول بصريات ',
-        avatar:require( '../assets/img.png')
+        avatar:require( '../assets/doctors/8.png')
     },
 
 ]
@@ -67,8 +70,8 @@ export default class Doctors extends Component {
                                         <Body>
                                             <View key={i} style={styles.user} >
                                                 <View style={{ flex: 1.3 }}>
-                                                    <Button info style={styles.btn}>
-                                                        <Text style={styles.btn} >احجز الآن</Text>
+                                                    <Button info style={styles.btn} onPress={() => { this.props.navigation.navigate('Reserve') }} >
+                                                        <Text style={styles.btn} >{I18n.t('reserveNow')}</Text>
                                                     </Button>
                                                 </View>
                                                 <View style={{ flex: 3.6, flexDirection: "row", alignItems: "center", justifyContent: "flex-end" }}>

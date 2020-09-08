@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 
 export default class location extends Component {
     // getInitialState() {
@@ -26,11 +27,24 @@ export default class location extends Component {
        provider={PROVIDER_GOOGLE}
          
          initialRegion={{
-         latitude: 37.78825,
-         longitude: -122.4324,
+         latitude: 26.393110,
+         longitude:  43.920857,
          latitudeDelta: 0.0922,
          longitudeDelta: 0.0421}}
-      />
+      >
+     <Marker
+    //  draggable
+     coordinate={{
+       latitude:  26.393110,
+       longitude:   43.920857,
+     }}
+//      onDragEnd={(e) => 
+//  console.log(JSON.stringify(e.nativeEvent.coordinate))
+// }
+     title={'مركز فيجن التخصصي للعيون'}
+    //  description={'This is a description of the marker'}
+   />
+      </MapView>
 
                 {/* <MapView
                     initialRegion={{
@@ -59,7 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     map: {
-        width: "50%",
-        height: "50%"
+        width: "100%",
+        height: "100%"
     }
 })

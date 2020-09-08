@@ -64,7 +64,7 @@ export default class Register extends Component {
         )
         dob = [this.state.BirthDate.getFullYear(), this.state.BirthDate.getMonth(), this.state.BirthDate.getDate()].join('-')
         // dob=(this.state.BirthDate.getFullYear()+''+this.state.BirthDate.getMonth()+'/'+this.state.BirthDate.getDate()).toString();
-        fetch('http://192.168.1.100:91/api/PatientApi/AddPatient/0/' + this.state.firstName_Ar + '/' + this.state.firstName_En + '/' + this.state.lastName_Ar + '/' + this.state.lastName_En + '/' + this.state.Mobile + '/' + this.state.username + '/' + this.state.Email + '/' + dob + '/' + this.state.password + '/' + this.state.Nationality + '/' + this.state.FK_Gender_ID, { method: 'GET' })
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/AddPatient/0/' + this.state.firstName_Ar + '/' + this.state.firstName_En + '/' + this.state.lastName_Ar + '/' + this.state.lastName_En + '/' + this.state.Mobile + '/' + this.state.username + '/' + this.state.Email + '/' + dob + '/' + this.state.password + '/' + this.state.Nationality + '/' + this.state.FK_Gender_ID, { method: 'GET' })
             .then((response) => response)
             .then((responseJson) => {
                 Toast.show({
@@ -75,6 +75,7 @@ export default class Register extends Component {
                     duration: 4000
                 })
                 console.log(responseJson._data)
+                this.props.navigation.navigate('Profile') 
 
             })
             .catch((error) => {
@@ -98,7 +99,7 @@ export default class Register extends Component {
                             {/* <Text style={styles.logoTxt}>تسجيل الدخول</Text> */}
                         </View>
                         {/* firstName_Ar */}
-                        <View style={styles.inputContainer}>
+                        {/* <View style={styles.inputContainer}>
 
                             <TextInput
                                 style={styles.inputTxt}
@@ -115,7 +116,7 @@ export default class Register extends Component {
                                 color={'rbga(255,255,255,0.7)'}
                             />
 
-                        </View>
+                        </View> */}
                         {/* firstName_En */}
                         <View style={styles.inputContainer}>
 
@@ -136,7 +137,7 @@ export default class Register extends Component {
 
                         </View>
                         {/* lastName_Ar */}
-                        <View style={styles.inputContainer}>
+                        {/* <View style={styles.inputContainer}>
 
                             <TextInput
                                 style={styles.inputTxt}
@@ -153,7 +154,7 @@ export default class Register extends Component {
                                 color={'rbga(255,255,255,0.7)'}
                             />
 
-                        </View>
+                        </View> */}
                         {/* lastName_En */}
                         <View style={styles.inputContainer}>
 
@@ -220,8 +221,8 @@ export default class Register extends Component {
                             <View style={styles.inputTxt}>
                                 <DatePicker
                                     defaultDate={new Date(2018, 4, 4)}
-                                    minimumDate={new Date(2018, 1, 1)}
-                                    maximumDate={new Date(2018, 12, 31)}
+                                    minimumDate={new Date(1900, 1, 1)}
+                                    maximumDate={new Date()}
                                     locale={"en"}
                                     timeZoneOffsetInMinutes={undefined}
                                     modalTransparent={false}
@@ -229,7 +230,7 @@ export default class Register extends Component {
                                     androidMode={"default"}
                                     placeHolderText={I18n.t('DateOfBirth')}
                                     textStyle={{ textAlign: 'right' }}
-                                    placeHolderTextStyle={{ color: 'gray' }}
+                                    placeHolderTextStyle={{ color: 'gray',textAlign:'right' }}
                                     onDateChange={(text) => this.setState({ BirthDate: text })}
 
                                     disabled={false}

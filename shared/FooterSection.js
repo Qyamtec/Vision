@@ -33,7 +33,6 @@ export default class FooterSection extends Component {
           </Button>
           <Button style={styles.ReserveBtn}  onPress={() =>  this.props.navigation.navigate('Reserve')}>
             <Icon name="date" type="Fontisto" style={{ marginBottom: 5, color:'#fff' }} />
-    
             <Text style={{ fontWeight: "bold",fontFamily: "Changa-Regular", fontSize: 16, flex:1, justifyContent:"center", textAlign:"center", color:'#fff' }}>{I18n.t('ReserveAppointment')}</Text>
           </Button>
           <Button vertical onPress={() => this.props.navigation.navigate('Questions')}>
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
   },
   link:{
     color:'#000',
-    fontSize:9,
+    fontSize:8,
     fontFamily: "Changa-Regular",
 
   },

@@ -62,7 +62,7 @@ export default class Home extends Component {
         //     }
         // )
         console.log(patientId)
-        fetch('http://192.168.1.100:91/api/PatientApi/PatientInvoice/' + patientId , {
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/PatientInvoice/' + patientId , {
             method: 'GET'
             //Request Type 
         })
@@ -85,7 +85,8 @@ export default class Home extends Component {
             });
     }
     render() {
-        const arr= this.state.User_Name.split('"')
+        const arr= this.state.Full_Name_En.split('"')
+        console.log('gggg'+this.state.Full_Name_En)
 
         return (
             <Container>
@@ -107,7 +108,7 @@ export default class Home extends Component {
                                 </View>
                                 <TouchableOpacity style={{ flexDirection: 'row', justifyContent: "flex-end", marginVertical: 20 }} onPress={() => { this.props.navigation.navigate('Profile') }}>
                                     {/* <Text style={styles.userName}> {this.props.getpatient()}</Text><Text style={styles.HelloTxt}>مرحبا بك  </Text> */}
-                                    <Text style={styles.userName}> {arr}</Text><Text style={styles.HelloTxt}> {I18n.t('Hello')} </Text>
+                                    <Text style={styles.userName}> {arr}</Text>
                                     <Image style={styles.patient} source={require('../assets/patient.png')} />
 
                                 </TouchableOpacity>
@@ -156,10 +157,10 @@ export default class Home extends Component {
                                     <Image style={styles.img} source={require('../assets/Check.png')} />
                                     <Text style={styles.homee}>{I18n.t('Check')}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Reserve')}>
+                                {/* <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('Reserve')}>
                                     <Image style={styles.img} source={require('../assets/Check.png')} />
                                     <Text style={styles.homee}>{I18n.t('educateYourself')} </Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </View>
                         </View>
 
@@ -242,8 +243,7 @@ const styles = StyleSheet.create({
     item: {
         marginTop: 23,
         marginBottom: 20,
-        // marginRight: WIDTH - 350,
-        // marginLeft: WIDTH - 350,
+        // width:200,
         marginHorizontal: 10,
         borderWidth: 2,
         borderColor: '#CCCACD',

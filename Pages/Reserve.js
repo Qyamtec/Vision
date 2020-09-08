@@ -27,8 +27,6 @@ export default class Reserve extends Component {
             SelectedTime: Number
             , showAlert: false,
             patientId: ""
-
-
         };
     }
 
@@ -49,7 +47,7 @@ export default class Reserve extends Component {
         //        
         myDate = this.state.date.getFullYear() + "-" + (this.state.date.getMonth() + 1) + "-" + this.state.date.getDate()
         console.log(myDate)
-        fetch("http://192.168.1.100:91/api/PatientApi/GetAllAvaliableAppointment/" + myDate + "/" + this.state.DoctorId + "/1/1")
+        fetch("https://visionapp.qyamtec.com/api/PatientApi/GetAllAvaliableAppointment/" + myDate + "/" + this.state.DoctorId + "/1/1")
             .then((response) => response.json())
             .then((responseJson) => {
                 (responseJson).forEach(element => {
@@ -96,7 +94,7 @@ export default class Reserve extends Component {
         //GET request 
 
         //fetch('http://vision.giize.com:90/api/PatientApi/GetOrgDoctors/1/6', {
-        fetch('http://192.168.1.100:91/api/PatientApi/GetOrgDoctors/1/6', {
+        fetch('https://visionapp.qyamtec.com/api/PatientApi/GetOrgDoctors/1/6', {
             method: 'GET'
             //Request Type 
         })
@@ -189,7 +187,7 @@ export default class Reserve extends Component {
                                 console.log(this.state.patientId)
                                 console.log(this.state.DoctorId)
                                 console.log((selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString())
-                                fetch('http://192.168.1.100:91/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/' + this.state.patientId + '/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
+                                fetch('https://visionapp.qyamtec.com/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/' + this.state.patientId + '/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
                                     //   fetch('http://vision.giize.com:90/api/AppointmentApi/Addappointment/' + this.state.SelectedTime + '/11/' + this.state.DoctorId + '/' + (selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + (selectedDate.getDate())).toString()
                                     // fetch("http://192.168.1.100:90/api/AppointmentApi/addappointment" 
                                     // fetch("http://192.168.1.100:90/api/AppointmentApi/Addappointment/2020-06-22/11/14/2020-06-23"
@@ -244,7 +242,7 @@ export default class Reserve extends Component {
                             <DatePicker
                                 defaultDate={new Date(this.state.dateff.getFullYear(), this.state.dateff.getMonth(), this.state.dateff.getDate())}
                                 minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2050, 12, 31)}
+                                maximumDate={new Date(2050,1,1)}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
                                 modalTransparent={false}
@@ -258,6 +256,7 @@ export default class Reserve extends Component {
                                         date: date
                                     });
                                     this.getAvailableTimes()
+                                    
                                 }}
                                 disabled={false}
                             />
