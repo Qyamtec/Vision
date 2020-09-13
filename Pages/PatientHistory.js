@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {
+import {StatusBar,
     Platform,
     StyleSheet,
     TouchableOpacity,
@@ -110,6 +110,7 @@ export default class Appointments extends Component {
     render() {
         return (
             <Container>
+                 <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
                 <ImageBackground source={imgBG} style={styles.backgroundContainer}>
                     <View style={styles.content}>
                         <FlatList

@@ -3,7 +3,7 @@ import { Root } from "native-base";
 import AsyncStorage from '@react-native-community/async-storage';
 
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground, TextInput, ScrollView, Image, Dimensions, Text, TouchableOpacity, Alert } from 'react-native';
+import { StatusBar, StyleSheet, View, ImageBackground, TextInput, ScrollView, Image, Dimensions, Text, TouchableOpacity, Alert } from 'react-native';
 import imgBG from '../assets/bg12.jpg'
 import logo from '../assets/Vision.jpg'
 import SaudiaLogo from '../assets/Saudia.png'
@@ -13,10 +13,7 @@ import I18n from '../src/I18n/index';
 
 // import startMainTabs from "../Pages/Home";
 const { width: WIDTH } = Dimensions.get('window')
-const onPress = () => {
-    alert("hhhh")
 
-};
 
 
 // const Login = ({ navigation }) => {
@@ -93,8 +90,6 @@ export default class Login extends Component {
                     })
                     this.setItem('patient', responseJson); // save user in asyncStorage - permanent
                     this.setItem('patientId', responseJson.Patient_ID);
-
-                    console.log('fhfhfghfg' + responseJson.Patient_ID)
                     this.setItem('User_Name', responseJson.User_Name);
                     this.setItem('Full_Name_En', responseJson.Full_Name_En);
                     this.setItem('LocalFilePath', responseJson.LocalFilePath);
@@ -102,18 +97,11 @@ export default class Login extends Component {
                     this.setItem('Extension', responseJson.Extension);
                     this.setItem('Server_Name', responseJson.Server_Name);
                     this.setItem('patient', responseJson);
-                    //   this.setState({params:'hhh'})
-
-                    //    this.getpatient();
-                    // startMainTabs();
                     this.props.navigation.navigate('Home')
-
-
                 }
             })
 
             .catch((error) => {
-                // alert(JSON.stringify(error));
                 console.error(error);
             });
 
@@ -128,6 +116,7 @@ export default class Login extends Component {
             <Root>
 
                 <ImageBackground source={imgBG} style={styles.backgroundContainer}>
+                    <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#fff" translucent={true} />
 
                     <View style={{ flexDirection: 'row', marginBottom: 20, marginHorizontal: 10 }}>
                         <TouchableOpacity
@@ -147,8 +136,6 @@ export default class Login extends Component {
                         {/* <Text>{I18n.t('chooseLang')}</Text> */}
 
                     </View>
-
-
                     <View style={{ alignItems: "center", }}>
                         <View style={styles.logoContainer}>
                             <Image source={logo} style={styles.logo} />

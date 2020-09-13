@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground,Dimensions } from 'react-native';
+import { StyleSheet,StatusBar, Text, View, Image, ImageBackground,Dimensions } from 'react-native';
 const { width: WIDTH } = Dimensions.get('window')
 
 export default class Splash extends Component {
@@ -8,6 +8,8 @@ export default class Splash extends Component {
             // <View style={styles.container} >
 
             <ImageBackground source={require('../assets/bg2.jpg')} style={styles.image}>
+            <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#fff" translucent = {true}/>
+               
                 <View style={styles.imgWrapper}>
                     <Image style={styles.img} source={require('../assets/logo1.png')} />
                 </View>

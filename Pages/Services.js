@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 //warning --temp 
 console.disableYellowBox = true;
 
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StatusBar,StyleSheet, View, Image, ScrollView } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Icon } from "native-base";
 import FooterSection from '../shared/FooterSection';
 
@@ -35,6 +35,7 @@ export default class Services extends Component {
   render() {
     return (
       <Container>
+                 <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
         <View style={styles.content}>
           <ScrollView>
             {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header,Body,Switch,Button, Content, List, ListItem, Text, Left, Right, Icon } from 'native-base';
 import I18n from '../src/I18n/index';
-import { View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import { StatusBar,View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import FooterSection from '../shared/FooterSection'
 
 export default class Setting extends Component {
@@ -15,6 +15,7 @@ export default class Setting extends Component {
   render() {
     return (
       <Container>
+                 <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
         <Content>
           <List>
           <ListItem icon  onPress={() => {

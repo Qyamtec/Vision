@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
+import { StatusBar,StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 
@@ -22,6 +22,8 @@ export default class location extends Component {
     render() {
         return (
             <View>
+                 <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
+
                 <MapView
         style={styles.map}
        provider={PROVIDER_GOOGLE}

@@ -4,7 +4,8 @@ import {
     View,
     Image,
     TouchableOpacity,
-    ImageBackground
+    ImageBackground,
+    StatusBar
 } from 'react-native';
 import { block } from 'react-native-reanimated';
 import FooterSection from '../shared/FooterSection'
@@ -91,7 +92,7 @@ export default class Home extends Component {
         return (
             <Container>
                 <ImageBackground source={imgBG} style={styles.containers}>
-
+                <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#6EDAF4" translucent = {true}/>
                     {/* <View style={styles.content}> */}
                     <View style={styles.containers}>
                         <View style={styles.header}>

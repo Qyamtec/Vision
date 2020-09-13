@@ -1,8 +1,7 @@
 import React, { Component,useState, useCallback, useEffect } from 'react'
 
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import {StatusBar, StyleSheet, View, Image, ScrollView } from 'react-native';
 import { Container, DeckSwiper, Card, CardItem, Button, Thumbnail, Text, Left, Body, Icon } from 'native-base';
-import FooterSection from '../shared/FooterSection';
 import I18n from '../src/I18n/index';
 import { GiftedChat } from 'react-native-gifted-chat'
 
@@ -62,7 +61,9 @@ export default class Chat extends Component {
      
       render() {
         return (
-          <GiftedChat
+          <Container>
+                 <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
+                <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
@@ -70,6 +71,8 @@ export default class Chat extends Component {
             }}
             renderFooter={this.renderFooter}
           />
+          </Container> 
+        
         )
         
       }

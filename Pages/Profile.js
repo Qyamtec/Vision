@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {
+import {StatusBar,
     StyleSheet,
     Text,
     View,
@@ -70,6 +70,7 @@ export default class Profile extends Component {
 
         return (
       <View style={styles.container}>
+                 <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
           <View style={styles.header}></View>
           <Image style={styles.avatar} source={{uri:"https://www.searchpng.com/wp-content/uploads/2019/02/Men-Profile-Image.png"}}/>
           {/* <Image style={styles.image} source={{uri:user.image}} /> */}

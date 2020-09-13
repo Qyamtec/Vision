@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, ScrollView,StatusBar } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Icon } from "native-base";
 import { Dimensions } from 'react-native';
 import FooterSection from '../shared/FooterSection';
@@ -57,6 +57,8 @@ export default class Doctors extends Component {
 
         return (
             <Container>
+                <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
+
         <View style={styles.content}>
             <ScrollView>
                 {

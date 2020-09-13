@@ -2,7 +2,7 @@
 import { Root } from "native-base";
 
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground, ScrollView, Image, Dimensions, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StatusBar,StyleSheet, View, ImageBackground, ScrollView, Image, Dimensions, Text, TextInput, TouchableOpacity } from 'react-native';
 import imgBG from '../assets/bg12.jpg'
 import logo from '../assets/Vision.jpg'
 import { Icon, Button } from 'native-base';
@@ -11,12 +11,6 @@ import ValidationComponent from 'react-native-form-validator';
 import I18n from '../src/I18n/index';
 
 const { width: WIDTH } = Dimensions.get('window')
-const onPress = () => {
-    alert("hhhh")
-
-};
-
-
 export default class Register extends Component {
     constructor() {
         super()
@@ -39,6 +33,14 @@ export default class Register extends Component {
         }
 
     }
+    setItem = async (name, data) => {
+        try {
+            await AsyncStorage.setItem(name, JSON.stringify(data));
+            console.log('data stored');
+        } catch (error) {
+            console.log('AsyncStorage save error: ' + error.message);
+        }
+    };
     onPress1 = () => {
         if (this.state.showPassProp === true) {
             this.setState({ showPassProp: false })
@@ -47,23 +49,8 @@ export default class Register extends Component {
         }
     }
     BtnRegister() {
-        console.log(
-            this.state.username,
-            this.state.firstName_Ar,
-            this.state.firstName_En,
-            this.state.lastName_Ar,
-            this.state.lastName_En,
-            this.state.Nationality,
-            this.state.FK_Gender_ID,
-            this.state.Mobile,
-            this.state.Email,
-            this.state.password,
-            this.state.confirmPassword,
-            this.state.BirthDate,
-
-        )
+       
         dob = [this.state.BirthDate.getFullYear(), this.state.BirthDate.getMonth(), this.state.BirthDate.getDate()].join('-')
-        // dob=(this.state.BirthDate.getFullYear()+''+this.state.BirthDate.getMonth()+'/'+this.state.BirthDate.getDate()).toString();
         fetch('https://visionapp.qyamtec.com/api/PatientApi/AddPatient/0/' + this.state.firstName_Ar + '/' + this.state.firstName_En + '/' + this.state.lastName_Ar + '/' + this.state.lastName_En + '/' + this.state.Mobile + '/' + this.state.username + '/' + this.state.Email + '/' + dob + '/' + this.state.password + '/' + this.state.Nationality + '/' + this.state.FK_Gender_ID, { method: 'GET' })
             .then((response) => response)
             .then((responseJson) => {
@@ -74,12 +61,18 @@ export default class Register extends Component {
                     position: "top",
                     duration: 4000
                 })
-                console.log(responseJson._data)
+                this.setItem('patient', responseJson); 
+                this.setItem('patientId', responseJson.Patient_ID);
+                this.setItem('User_Name', responseJson.User_Name);
+                this.setItem('Full_Name_En', responseJson.Full_Name_En);
+                this.setItem('LocalFilePath', responseJson.LocalFilePath);
+                this.setItem('FTPFilePath', responseJson.FTPFilePath);
+                this.setItem('Extension', responseJson.Extension);
+                this.setItem('Server_Name', responseJson.Server_Name);
+                this.setItem('patient', responseJson);
                 this.props.navigation.navigate('Profile') 
-
             })
             .catch((error) => {
-                // alert(JSON.stringify(error));
                 console.error(error);
             });
 
@@ -93,6 +86,8 @@ export default class Register extends Component {
         return (
             <Root>
                 <ImageBackground source={imgBG} style={styles.backgroundContainer}>
+                <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#fff" translucent = {true}/>
+                   
                     <ScrollView>
                         <View style={styles.logoContainer}>
                             <Image source={logo} style={styles.logo} />
@@ -370,6 +365,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: null,
         height: null,
+        padding:5
     },
     logo: {
         width: 120,

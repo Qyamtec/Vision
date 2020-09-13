@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     View,
     Image,
-    ScrollView, ImageBackground, Dimensions
+    ScrollView, ImageBackground, Dimensions,StatusBar
 } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
 import { Container, Header, Content, Card, CardItem, Alert, Text, Body, Button, Icon, Toast } from "native-base";
@@ -68,6 +68,8 @@ export default class Appointments extends Component {
     contentdata() {
         return (
             <ScrollView>
+                <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
+
                 {
                     this.state.Appointments.map((u, i) => {
                         return (

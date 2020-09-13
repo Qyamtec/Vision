@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StatusBar,StyleSheet, View, Image, ScrollView } from 'react-native';
 import { Container, DeckSwiper, Card, CardItem, Button, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 import FooterSection from '../shared/FooterSection';
 import I18n from '../src/I18n/index';
@@ -38,6 +38,7 @@ export default class About extends Component {
     render() {
         return (
             <Container>
+                <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#232323" translucent = {true}/>
                 <View style={styles.content}>
                     <View style={{ flex: 1 , padding:5}}>
                         <View style={styles.imgWrapper} >
