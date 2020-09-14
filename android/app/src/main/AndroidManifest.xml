@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.vision">
+  package="vision.eye">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- <preference name="android-targetSdkVersion" value="29"/> -->
 
     <application
       android:name=".MainApplication"

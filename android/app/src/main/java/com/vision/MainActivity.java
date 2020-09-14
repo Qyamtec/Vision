@@ -1,4 +1,4 @@
-package com.vision;
+package vision.eye;
 
 import com.facebook.react.ReactActivity;
 

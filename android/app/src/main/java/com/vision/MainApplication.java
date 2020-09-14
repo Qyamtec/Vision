@@ -1,4 +1,4 @@
-package com.vision;
+package vision.eye;
 
 import android.app.Application;
 import android.content.Context;

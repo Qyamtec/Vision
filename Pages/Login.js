@@ -55,7 +55,7 @@ export default class Login extends Component {
     }
     BtnLoginfun() {
         //  console.log(this.state.userName)
-        fetch('https://visionapp.qyamtec.com/api/PatientApi/CheckUserIfExist/' + this.state.userName + '/' + this.state.password, { method: 'GET' })
+        fetch('http://192.168.1.100:91/api/PatientApi/CheckUserIfExist/' + this.state.userName + '/' + this.state.password, { method: 'GET' })
             //   fetch('https://vision.giize.com:90/api/PatientApi/CheckUserIfExist/' + this.state.userName + '/' + this.state.password, { method: 'GET' })     
             .then((response) => response.json())
             .then((responseJson) => {

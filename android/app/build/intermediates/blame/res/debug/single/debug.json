@@ -224,6 +224,10 @@
         "source": "C:\\Users\\Qyam5\\.gradle\\caches\\transforms-2\\files-2.1\\2b7e6ebaa515cd43f42fb356f0d1941c\\appcompat-1.1.0\\res\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png"
     },
     {
+        "merged": "D:\\Application\\Vision\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_file_provider_paths.xml.flat",
+        "source": "D:\\Application\\Vision\\node_modules\\react-native-webview\\android\\build\\intermediates\\packaged_res\\debug\\xml\\file_provider_paths.xml"
+    },
+    {
         "merged": "D:\\Application\\Vision\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_fragment_fast_out_extra_slow_in.xml.flat",
         "source": "C:\\Users\\Qyam5\\.gradle\\caches\\transforms-2\\files-2.1\\57896e3f8d3af1ea30640dfb96021293\\fragment-1.2.1\\res\\anim\\fragment_fast_out_extra_slow_in.xml"
     },
